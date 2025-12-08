@@ -2,15 +2,16 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Calendar, MapPin, Tag, Users, Ticket } from "lucide-react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import LoadingSpinner from "../Shared/LoadingSpinner";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const EventDetails = () => {
-    
 
     const { id } = useParams()
-   
-    console.log(id)
+    const { user } = useAuth()
+
 
     const { data: event = {} } = useQuery({
         queryKey: ['ClubDetails', id],
@@ -21,11 +22,67 @@ const EventDetails = () => {
         }
     })
 
+  
+
+    const handelEvent = (data) => {
+
+        const registerdata = {
+            title: data.title,
+            email: user?.email,
+            clubId: data?.clubId,
+            eventId: data._id,
+            status: "registered",
+            date: new Date()
+        }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will be able to access this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: `Register`
+        }).then(async (result) => {
+
+            const res = await axios.post('http://localhost:3000/register/events', registerdata)
+
+
+         
+            if (res.data.insertedId) {
+
+
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Register Now!",
+                        
+                        icon: "success"
+                    });
+                }
+            }
+            else {
+                Swal.fire({
+                    title: 'Error!',
+                    text: `${res.data.message}`,
+                    icon: 'error',
+                    confirmButtonText: 'Cool'
+                })
+            }
+
+
+
+
+        })
+
+
+
+    }
+
     if (!event) return <LoadingSpinner />;
     return (
         <div className="max-w-3xl mx-auto p-6">
             <div className="bg-white shadow-xl rounded-2xl overflow-hidden">
-             
+
                 {/* Content */}
                 <div className="p-6 space-y-5">
                     {/* Title */}
@@ -87,6 +144,7 @@ const EventDetails = () => {
                                 </div>
                             </div>
                         )}
+
                     </div>
 
                     {/* Max Attendees */}
@@ -97,9 +155,13 @@ const EventDetails = () => {
                                 <p className="text-sm text-gray-500">Max Attendees</p>
                                 <p className="font-semibold text-gray-700">{event.maxAttendees}</p>
                             </div>
+
                         </div>
                     )}
+                    <div className="text-center lg:text-end ">
+                        <Link onClick={() => handelEvent(event)} className=" btn btn-outline lg:px-24  btn-info px-8  ">Register Here</Link>
 
+                    </div>
                     {/* Created At */}
                     <p className="text-sm text-gray-400 mt-4">
                         Created on: {new Date(event.createdAt).toLocaleDateString()}

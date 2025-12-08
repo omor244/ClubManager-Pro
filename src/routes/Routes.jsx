@@ -8,7 +8,6 @@ import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
 import Profile from '../pages/Dashboard/Common/Profile'
 import Statistics from '../pages/Dashboard/Common/Statistics'
 import MainLayout from '../layouts/MainLayout'
-import MyOrders from '../pages/Dashboard/Customer/MyOrders'
 import { createBrowserRouter } from 'react-router'
 import Clubs from '../components/Home/Clubs'
 import AddPlant from '../pages/Dashboard/Club-Manager/AddPlant'
@@ -17,6 +16,11 @@ import CreateClub from '../pages/Dashboard/Club-Manager/CreateClub'
 import ClubDetails from '../components/FeaturedClubs/ClubDetails'
 import Events from '../components/Events/Events'
 import EventDetails from '../components/Events/EventDetails'
+import MyEvent from '../pages/Dashboard/Member/MyEvent'
+import PaymentSuccess from '../components/PaymentSuccess/PaymentSuccess'
+import Myclubs from '../pages/Dashboard/Member/Myclubs'
+import PaymentHistory from '../pages/Dashboard/Member/PaymentHistory'
+import BecomeAManager from '../pages/Dashboard/Member/BecomeAManager'
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +52,10 @@ export const router = createBrowserRouter([
   },
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <SignUp /> },
+  {
+    path: '/payment-success',
+    element: <PaymentSuccess />
+  },
   {
     path: '/dashboard',
     element: (
@@ -105,14 +113,22 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'my-orders',
-        element: (
-          <PrivateRoute>
-            <MyOrders />
-          </PrivateRoute>
-        ),
+        path: "My-events",
+        element: <MyEvent/>
       },
-    
+      {
+        path: "my-clubs",
+        element: <Myclubs/>
+      },
+      {
+        path: "Payment-History",
+        element: <PaymentHistory/>
+      },
+      {
+        path: "BecomeAManager",
+        element: <BecomeAManager></BecomeAManager>
+      },
+      
     ],
   },
 ])

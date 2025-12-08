@@ -57,9 +57,8 @@ const EventsTable = ({ event }) => {
 
                             {/* Card Actions - Separated for Clarity */}
                             <div className="card-actions justify-center mt-6 pt-4 border-t border-gray-200 dark:border-gray-600">
-                                <Link to={`/events/${event._id}`} className="btn btn-sm btn-info btn-outline w-1/3">View</Link>
-                                <button className="btn btn-sm btn-warning btn-outline w-1/3">Edit</button>
-                                <button className="btn btn-sm btn-error w-1/3">Delete</button>
+                                <Link to={`/events/${event._id}`} className="btn btn-sm w-full mt-4 btn-info btn-outline ">View</Link>
+                               
                             </div>
                         </div>
                     </div>

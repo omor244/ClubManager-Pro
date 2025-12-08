@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { TbFidgetSpinner } from 'react-icons/tb';
 
 import { useForm } from 'react-hook-form';
-import { Imageupload } from '../../utility/utility';
+import { Imageupload, saveorupdateuser } from '../../utility/utility';
 
 const SignUp = () => {
   // 1. Destructuring auth functions and state
@@ -39,7 +39,7 @@ const SignUp = () => {
       // 2. User Registration (Firebase/Auth)
       await createUser(email, password);
 
-      // await saveorupdateuser({ name, email, image: imageURL });
+      await saveorupdateuser({ name, email, image: imageURL });
       // 3. Update User Profile (Firebase)
       await updateUserProfile(name, imageURL);
 
@@ -67,7 +67,7 @@ const SignUp = () => {
       const user = result.user; // Get the user object
 
       // Save/Update user data in DB (optional, but good practice for Google Sign-in)
-      // await saveorupdateuser({ name: user.displayName, email: user.email, image: user.photoURL });
+      await saveorupdateuser({ name: user.displayName, email: user.email, image: user.photoURL });
 
       navigate(from, { replace: true });
       toast.success('Google Signup Successful');

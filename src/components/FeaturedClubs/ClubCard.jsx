@@ -8,7 +8,9 @@ const cardVariants = {
 
 
 const ClubCard = ({ club }) => {
-  
+            
+    const { bannerImage, clubName, emoji, category, membershipFee, location, _id } = club || {}
+   
     return (
 
         // Use motion.div to apply the animation variants
@@ -21,8 +23,8 @@ const ClubCard = ({ club }) => {
                 {/* Banner Image */}
                 <figure className="h-40 w-full">
                     <img
-                        src={club.bannerImage}
-                        alt={club.clubName}
+                        src={bannerImage}
+                        alt={clubName}
                         className="w-full h-full object-cover"
                     />
                 </figure>
@@ -34,19 +36,19 @@ const ClubCard = ({ club }) => {
                     <div className="flex items-center space-x-3">
                         <div className="avatar placeholder">
                             <div className="bg-primary/20 text-primary-content rounded-full w-12 h-12 flex items-center justify-center">
-                            <span className="text-xl">{club.emoji ? club.emoji : '🔥'}</span>
+                            <span className="text-xl">{emoji ? emoji : '🔥'}</span>
                             </div>
                         </div>
 
                         <div>
-                            <h2 className="card-title text-lg font-bold">{club.clubName}</h2>
-                            <p className="text-sm text-gray-500">{club.category}</p>
+                            <h2 className="card-title text-lg font-bold">{clubName}</h2>
+                            <p className="text-sm text-gray-500">{category}</p>
                         </div>
                     </div>
 
                     {/* Members / Fee */}
                     <p className="text-sm mt-3 font-medium">
-                        <span className="text-primary font-bold">{club.membershipFee}</span> Members
+                        <span className="text-primary font-bold">{membershipFee}</span> Members
                     </p>
 
                     {/* Location */}
@@ -69,12 +71,12 @@ const ClubCard = ({ club }) => {
                                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
                             />
                         </svg>
-                        {club.location}
+                        {location}
                     </p>
 
                     {/* Button */}
                     <div className="card-actions mt-4">
-                    <Link to={`/Clubs/${club._id}`} className="btn btn-primary w-full">View Club</Link>
+                    <Link to={`/Clubs/${_id}`} className="btn btn-primary w-full">View Club</Link>
                     </div>
 
                 </div>

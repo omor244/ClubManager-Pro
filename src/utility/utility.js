@@ -16,10 +16,9 @@ export const Imageupload = async imagedata => {
 }
 
 
-// export const saveorupdateuser = async (userdata) => {
+export const saveorupdateuser = async (userdata) => {
 
-//     const { data } = await axios.post('https://plant-sever.vercel.app/users', userdata)
-
-
-//     return data
-// }
+    const { data } = await axios.post('http://localhost:3000/users', userdata)
+    
+    return data
+}

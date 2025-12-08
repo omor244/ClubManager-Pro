@@ -5,6 +5,7 @@ import { TbFidgetSpinner } from 'react-icons/tb';
 import { toast } from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
+import { saveorupdateuser } from '../../utility/utility';
 
 const Login = () => {
   const { signIn, signInWithGoogle, loading, user, setLoading } = useAuth();
@@ -21,9 +22,13 @@ const Login = () => {
   // Form submission
   const onSubmit = async (data) => {
     const { email, password } = data;
+
+
     setLoading(true);
     try {
-      await signIn(email, password);
+    const {user} = await signIn(email, password);
+
+      await saveorupdateuser({ name: user?.displayName, email: user?.email, image: user?.photoURL })
       navigate(from, { replace: true });
       toast.success('Login Successful');
     } catch (err) {
@@ -38,7 +43,15 @@ const Login = () => {
     if (loading) return;
     setLoading(true);
     try {
-      await signInWithGoogle();
+   const {user} =  await signInWithGoogle();
+
+      await saveorupdateuser(
+        {
+          name: user?.displayName,
+          email: user?.email,
+          image: user?.photoURL
+        }
+      )
       navigate(from, { replace: true });
       toast.success('Login Successful');
     } catch (err) {

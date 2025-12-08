@@ -4,10 +4,11 @@ import { useParams } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import LoadingSpinner from '../Shared/LoadingSpinner';
+import useAuth from '../../hooks/useAuth';
 
 const ClubDetails = () => {
-
-    const {id} = useParams()
+    const { user } = useAuth()
+    const { id } = useParams()
     const [activeTab, setActiveTab] = useState('about');
 
     const { data: club = {} } = useQuery({
@@ -18,11 +19,39 @@ const ClubDetails = () => {
             return res.data
         }
     })
+    console.log(club)
 
-    if (!club) return <LoadingSpinner/>;
+
+    const { _id, clubName, category, status, membershipFee } = club || {}
+
+//  userEmail amount type(membership, event) clubId(if applicable) eventId(if applicable) stripePaymentIntentId or transactionId status createdAt
+    const handelpayment = () => {
+        const paymentinfo = {
+            clubId: _id,
+            name: clubName,
+            category,
+            price: membershipFee,
+            type: 'membership',
+            status,
+            email: user?.email,
+        }
+
+        axios.post('http://localhost:3000/create-checkout-session', paymentinfo)
+            .then(res => {
+                console.log(res.data)
+
+                window.location.href = res.data.url 
+            })
+            .catch(err => {
+            console.log(err)
+        })
+
+    }
+
+    if (!club) return <LoadingSpinner />;
 
     return (
-      
+
         <div className="max-w-7xl mx-auto p-6 space-y-8">
             {/* Hero Banner */}
             <div className="relative rounded-lg overflow-hidden shadow-xl">
@@ -49,7 +78,7 @@ const ClubDetails = () => {
                 <div className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
                     <h3 className="text-gray-500 text-sm">Status</h3>
                     <span className={`px-2 py-1 rounded text-white ${club.status === 'approved' ? 'bg-green-500' :
-                            club.status === 'pending' ? 'bg-yellow-500' : 'bg-red-500'
+                        club.status === 'pending' ? 'bg-yellow-500' : 'bg-red-500'
                         }`}>
                         {club.status}
                     </span>
@@ -88,14 +117,14 @@ const ClubDetails = () => {
                     {activeTab === 'about' && (
                         <p className="text-gray-700">{club.description}</p>
                     )}
-                   
+
                 </motion.div>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col md:flex-row items-center justify-end gap-4">
-                <button className="btn btn-primary btn-lg w-full md:w-auto">Join Club</button>
-                
+                <button onClick={handelpayment} className="btn btn-primary btn-lg w-full md:w-auto">Join Club</button>
+
             </div>
         </div>
     );

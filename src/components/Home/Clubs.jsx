@@ -63,7 +63,7 @@ const Clubs = () => {
             type="text"
             placeholder="Search clubs..."
             className="input input-bordered w-full md:w-1/2"
-            value={search}
+            // value={search}
             // onChange={(e) => setSearch(e.target.value)}
           />
 
@@ -81,7 +81,6 @@ const Clubs = () => {
           </select>
         </div>
 
-        {/* Cards Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
