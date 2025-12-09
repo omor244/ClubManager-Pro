@@ -1,8 +1,40 @@
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import { useState } from 'react'
+import useAxiosSecure from '../../hooks/useAxiosSecure'
+import { toast } from 'react-toastify'
 
-const UpdateUserRoleModal = ({ isOpen, closeModal, role }) => {
-  const [updatedRole, setUpdatedRole] = useState(role)
+const UpdateUserRoleModal = ({ isOpen, closeModal, refetch, user }) => {
+  const axiossecure = useAxiosSecure()
+   console.log(user)
+  const [updatedRole, setUpdatedRole] = useState(user?.role)
+
+  console.log(updatedRole)
+ 
+  const handelupdateuser = async () => {
+    try {
+      const updateinfo = {
+        email: user?.email,
+        role: updatedRole,
+      };
+
+      await axiossecure.patch('/update-role', updateinfo);
+
+
+      toast.success("User role updated!");
+      refetch();
+    } catch (err) {
+      console.error("Update error:", err);
+      toast.error("Something went wrong!");
+    }
+    finally {
+      closeModal()
+    }
+
+
+
+  }
+
+
 
   return (
     <>
@@ -33,13 +65,14 @@ const UpdateUserRoleModal = ({ isOpen, closeModal, role }) => {
                     name='role'
                     id=''
                   >
-                    <option value='customer'>Customer</option>
-                    <option value='seller'>Seller</option>
+                    <option value='member'>Member</option>
+                    <option value='manager'>Manager</option>
                     <option value='admin'>Admin</option>
                   </select>
                 </div>
                 <div className='flex mt-2 justify-around'>
                   <button
+                    onClick={handelupdateuser}
                     type='button'
                     className='cursor-pointer inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2'
                   >

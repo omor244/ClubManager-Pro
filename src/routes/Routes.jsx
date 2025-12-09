@@ -21,6 +21,7 @@ import PaymentSuccess from '../components/PaymentSuccess/PaymentSuccess'
 import Myclubs from '../pages/Dashboard/Member/Myclubs'
 import PaymentHistory from '../pages/Dashboard/Member/PaymentHistory'
 import BecomeAManager from '../pages/Dashboard/Member/BecomeAManager'
+import Transactions from '../pages/Dashboard/Admin/Transactions'
 
 export const router = createBrowserRouter([
   {
@@ -101,6 +102,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageUsers />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'Transactions',
+        element: (
+          <PrivateRoute>
+            <Transactions></Transactions>
           </PrivateRoute>
         ),
       },

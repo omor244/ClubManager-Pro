@@ -88,7 +88,7 @@ const Sidebar = () => {
               />
               {/* Role-Based Menu */}
               {role.role === "admin" && <AdminMenu /> }
-              {role.role === "clubManager" && <SellerMenu /> }
+              {role.role === "manager" && <SellerMenu /> }
               {role.role === "member" &&  <CustomerMenu />}
               
               

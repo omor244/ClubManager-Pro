@@ -2,9 +2,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FaUser, FaEnvelope, FaImage } from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
+import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const BecomeAManager = () => {
     const { user } = useAuth()
+    const axiosSecure = useAxiosSecure()
     const {
         register,
         handleSubmit,
@@ -21,8 +25,20 @@ const BecomeAManager = () => {
             photoURL: data?.photoURL,
             role: 'member',
             apply_At: new Date().toLocaleDateString()
-        }
-        
+        } 
+
+        axiosSecure.post('/manager-request', managerinfo)
+            .then(res => {
+               
+                
+                if (res.data.insertedId) {
+                    toast.success('Wait For Admin')
+                }
+                else {
+                    toast.error("Already Requested")
+                }
+        })
+ 
         reset();
     };
 
