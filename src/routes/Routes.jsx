@@ -10,8 +10,7 @@ import Statistics from '../pages/Dashboard/Common/Statistics'
 import MainLayout from '../layouts/MainLayout'
 import { createBrowserRouter } from 'react-router'
 import Clubs from '../components/Home/Clubs'
-import AddPlant from '../pages/Dashboard/Club-Manager/AddPlant'
-import MyInventory from '../pages/Dashboard/Club-Manager/MyInventory'
+import AddEvent from '../pages/Dashboard/Club-Manager/AddEnent'
 import CreateClub from '../pages/Dashboard/Club-Manager/CreateClub'
 import ClubDetails from '../components/FeaturedClubs/ClubDetails'
 import Events from '../components/Events/Events'
@@ -22,6 +21,10 @@ import Myclubs from '../pages/Dashboard/Member/Myclubs'
 import PaymentHistory from '../pages/Dashboard/Member/PaymentHistory'
 import BecomeAManager from '../pages/Dashboard/Member/BecomeAManager'
 import Transactions from '../pages/Dashboard/Admin/Transactions'
+import ManageClubs from '../pages/Dashboard/Admin/ManageClubs'
+import Mymembers from '../pages/Dashboard/Club-Manager/Mymembers'
+import ManageEvents from '../pages/Dashboard/Club-Manager/ManageEvents'
+import MyEventsregister from '../pages/Dashboard/Club-Manager/MyEventsregister'
 
 export const router = createBrowserRouter([
   {
@@ -74,11 +77,11 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'add-plant',
+        path: 'add-event',
         element: (
           <PrivateRoute>
-            <AddPlant />
-          </PrivateRoute>
+            <AddEvent />
+        </PrivateRoute>
         ),
       },
       {
@@ -93,7 +96,23 @@ export const router = createBrowserRouter([
         path: 'my-inventory',
         element: (
           <PrivateRoute>
-            <MyInventory />
+            <Mymembers/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-register',
+        element: (
+          <PrivateRoute>
+            <MyEventsregister/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'manage-events',
+        element: (
+          <PrivateRoute>
+            <ManageEvents/>
           </PrivateRoute>
         ),
       },
@@ -110,6 +129,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Transactions></Transactions>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'manage-clubs',
+        element: (
+          <PrivateRoute>
+           <ManageClubs/>
           </PrivateRoute>
         ),
       },

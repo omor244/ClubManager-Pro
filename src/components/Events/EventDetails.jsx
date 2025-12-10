@@ -14,7 +14,7 @@ const EventDetails = () => {
 
 
     const { data: event = {} } = useQuery({
-        queryKey: ['ClubDetails', id],
+        queryKey: ['EventsDetails', id],
         queryFn: async () => {
             const res = await axios(`http://localhost:3000/events/${id}`)
 
@@ -25,14 +25,16 @@ const EventDetails = () => {
   
 
     const handelEvent = (data) => {
-
+      
         const registerdata = {
             title: data.title,
             email: user?.email,
             clubId: data?.clubId,
             eventId: data._id,
             status: "registered",
-            date: new Date()
+            date: new Date(),
+            managerEvent: data?.email
+            
         }
 
         Swal.fire({
@@ -159,7 +161,9 @@ const EventDetails = () => {
                         </div>
                     )}
                     <div className="text-center lg:text-end ">
-                        <Link onClick={() => handelEvent(event)} className=" btn btn-outline lg:px-24  btn-info px-8  ">Register Here</Link>
+                        {
+                            event?.status === 'approved' ? <Link onClick={() => handelEvent(event)} className="btn btn-primary btn-outline lg:px-24 px-8  ">Register Here</Link> : <p className="text-primary btn  btn-outline">pending</p>
+                     }
 
                     </div>
                     {/* Created At */}

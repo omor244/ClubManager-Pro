@@ -1,90 +1,79 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router';
+import { Users, MapPin, ChevronRight } from 'lucide-react';
+
 const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } },
 };
 
-
-
 const ClubCard = ({ club }) => {
-            
     const { bannerImage, clubName, emoji, category, membershipFee, location, _id } = club || {}
    
     return (
-
-        // Use motion.div to apply the animation variants
         <motion.div
             variants={cardVariants}
-            className="card w-full bg-base-100 shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-primary/50"
+            className="group h-full bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-orange-200"
         >
-          
+            {/* Banner Image with Overlay */}
+            <div className="relative h-48 w-full overflow-hidden">
+                <img
+                    src={bannerImage}
+                    alt={clubName}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
+                
+                {/* Emoji Badge */}
+                <div className="absolute top-3 right-3 bg-white rounded-full p-2 shadow-lg">
+                    <span className="text-2xl">{emoji || '🔥'}</span>
+                </div>
+            </div>
 
-                {/* Banner Image */}
-                <figure className="h-40 w-full">
-                    <img
-                        src={bannerImage}
-                        alt={clubName}
-                        className="w-full h-full object-cover"
-                    />
-                </figure>
+            {/* Card Content */}
+            <div className="p-6">
+                {/* Category Badge */}
+                <span className="inline-block px-3 py-1 bg-orange-100 text-orange-600 text-xs font-bold uppercase rounded-full mb-3">
+                    {category}
+                </span>
 
-                {/* Card Content */}
-                <div className="card-body p-5">
+                {/* Club Name */}
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-orange-600 transition-colors line-clamp-2">
+                    {clubName}
+                </h3>
 
-                    {/* Club Title + Category */}
-                    <div className="flex items-center space-x-3">
-                        <div className="avatar placeholder">
-                            <div className="bg-primary/20 text-primary-content rounded-full w-12 h-12 flex items-center justify-center">
-                            <span className="text-xl">{emoji ? emoji : '🔥'}</span>
-                            </div>
-                        </div>
-
+                {/* Details Section */}
+                <div className="space-y-3 mb-6">
+                    {/* Members */}
+                    <div className="flex items-center gap-3">
+                        <Users className="h-5 w-5 text-orange-500 shrink-0" />
                         <div>
-                            <h2 className="card-title text-lg font-bold">{clubName}</h2>
-                            <p className="text-sm text-gray-500">{category}</p>
+                            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Members</p>
+                            <p className="text-sm font-bold text-gray-800">{membershipFee} Members</p>
                         </div>
                     </div>
-
-                    {/* Members / Fee */}
-                    <p className="text-sm mt-3 font-medium">
-                        <span className="text-primary font-bold">{membershipFee}</span> Members
-                    </p>
 
                     {/* Location */}
-                    <p className="text-sm text-gray-600 mt-1 flex items-center gap-1">
-                        <svg
-                            className="w-4 h-4 text-primary"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M12 11c1.656 0 3-1.567 3-3.5S13.656 4 12 4s-3 1.567-3 3.5S10.344 11 12 11z"
-                            />
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                            />
-                        </svg>
-                        {location}
-                    </p>
-
-                    {/* Button */}
-                    <div className="card-actions mt-4">
-                    <Link to={`/Clubs/${_id}`} className="btn btn-primary w-full">View Club</Link>
+                    <div className="flex items-center gap-3">
+                        <MapPin className="h-5 w-5 text-orange-500 shrink-0" />
+                        <div>
+                            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Location</p>
+                            <p className="text-sm text-gray-800 font-medium">{location}</p>
+                        </div>
                     </div>
-
                 </div>
-        
 
+                {/* CTA Button */}
+                <Link 
+                    to={`/Clubs/${_id}`} 
+                    className="flex items-center justify-center gap-2 w-full bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                >
+                    View Club
+                    <ChevronRight className="h-4 w-4" />
+                </Link>
+            </div>
         </motion.div>
     );
-
 };
 
 export default ClubCard;

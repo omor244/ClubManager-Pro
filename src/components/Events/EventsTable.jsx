@@ -1,71 +1,85 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { Calendar, MapPin, DollarSign, ArrowRight } from 'lucide-react';
 
-// Using a professional component name to reflect the design choice
 const EventsTable = ({ event }) => {
+    const isUpcoming = new Date(event.eventDate) > new Date();
+    
     return (
-        <div className="w-full p-4  bg-white  rounded-xl shadow-2xl dark:border-gray-700">
-         
+        <div className="group h-full bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-orange-200">
+            
+            {/* Header Badge Section */}
+            <div className="bg-linear-to-r from-orange-50 to-orange-100 px-6 py-4 flex justify-between items-center border-b border-orange-200">
+                <div className="flex items-center gap-2">
+                    <Calendar className="h-5 w-5 text-orange-600" />
+                    <span className="text-sm font-semibold text-gray-800">
+                        {new Date(event.eventDate).toLocaleDateString(undefined, {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric'
+                        })}
+                    </span>
+                </div>
+                <div className={`px-3 py-1 rounded-full text-xs font-bold ${
+                    event.isPaid 
+                        ? 'bg-orange-600 text-white' 
+                        : 'bg-green-100 text-green-700'
+                }`}>
+                    {event.isPaid ? 'Paid Event' : 'Free Event'}
+                </div>
+            </div>
 
-          
-     
-              
-                    <div>
-                        {/* Event Date & Category Header (Visual Focus) */}
-                <div className="p-4 bg-info   text-primary-content flex justify-between items-center">
-                            <div className="flex items-center text-sm font-semibold">
-                                {/* Calendar Icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>
-                                {new Date(event.eventDate).toLocaleDateString(undefined, {
-                                    year: 'numeric',
-                                    month: 'short',
-                                    day: 'numeric'
-                                })}
-                            </div>
-                            <div className="badge badge-outline badge-lg text-primary-content border-primary-content">
-                                {event.isPaid ? 'Paid' : 'Free'}
-                            </div>
-                        </div>
+            {/* Card Body - Event Details */}
+            <div className="p-6">
+                {/* Club Name */}
+                <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">
+                    {event.clubName || event.clubId}
+                </span>
 
-                        {/* Card Body - Event Details */}
-                        <div className="card-body p-6">
-                            <span className="text-xs font-medium text-black ">
-                                {event.clubName || event.clubId}
-                            </span>
+                {/* Event Title */}
+                <h3 className="text-xl font-bold text-gray-900 mt-2 mb-4 group-hover:text-orange-600 transition-colors line-clamp-2">
+                    {event.title}
+                </h3>
 
-                            <h3 className="card-title text-xl font-medium mt-1 mb-3 text-black ">
-                                {event.title}
-                            </h3>
-
-                            {/* Details List */}
-                            <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                                <div className="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-black mr-2" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
-                            <span className="font-bold text-black">Location:</span>  <p className='text-black'>{event.location}</p>
-                                </div>
-
-                                <div className="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-success mr-2" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zM6 16a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H8a2 2 0 01-2-2v-2z" clipRule="evenodd" /></svg>
-                                    <span className="font-bold text-black">Fee:</span>{" "}
-                                    {event.isPaid ? (
-                                        <span className="ml-1 font-bold text-success">${event.eventFee}</span>
-                                    ) : (
-                                        <span className="ml-1 text-black font-medium">FREE</span>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Card Actions - Separated for Clarity */}
-                            <div className="card-actions justify-center mt-6 pt-4 border-t border-gray-200 dark:border-gray-600">
-                                <Link to={`/events/${event._id}`} className="btn btn-sm w-full mt-4 btn-info btn-outline ">View</Link>
-                               
-                            </div>
+                {/* Details Section */}
+                <div className="space-y-3 mb-6">
+                    {/* Location */}
+                    <div className="flex items-start gap-3">
+                        <MapPin className="h-5 w-5 text-orange-500 shrink-0 mt-0.5" />
+                        <div>
+                            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Location</p>
+                            <p className="text-sm text-gray-800 font-medium">{event.location}</p>
                         </div>
                     </div>
-         
-        
 
-         
+                    {/* Fee */}
+                    <div className="flex items-start gap-3">
+                        <DollarSign className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <div>
+                            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Event Fee</p>
+                            {event.isPaid ? (
+                                <p className="text-sm font-bold text-green-600">${event.eventFee}</p>
+                            ) : (
+                                <p className="text-sm font-bold text-green-600">FREE</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* CTA Button */}
+                <Link 
+                    to={`/events/${event._id}`} 
+                    className="flex items-center justify-center gap-2 w-full bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                >
+                    View Details
+                    <ArrowRight className="h-4 w-4" />
+                </Link>
+            </div>
+
+            {/* Status Indicator */}
+            {isUpcoming && (
+                <div className="h-1 bg-linear-to-r from-orange-500 to-orange-600"></div>
+            )}
         </div>
     );
 };

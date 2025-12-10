@@ -1,6 +1,24 @@
-import SellerOrderDataRow from '../../../components/Dashboard/TableRows/SellerOrderDataRow'
+import { useQuery } from '@tanstack/react-query';
+import PlantDataRow from '../../../components/Dashboard/TableRows/PlantDataRow'
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
+import useAuth from '../../../hooks/useAuth';
 
-const ManageOrders = () => {
+const Mymembers = () => {
+  const {user} = useAuth()
+   const axiosSecure = useAxiosSecure()
+  const { data: memberships = [], isLoading, refetch } = useQuery({
+    queryKey: ['memberships', user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure(`/memberships/${user?.email}`, )
+      return res.data;
+    }
+  });
+
+  console.log(memberships)
+
+  if (isLoading) return <LoadingSpinner />;
+
   return (
     <>
       <div className='container mx-auto px-4 sm:px-8'>
@@ -10,6 +28,7 @@ const ManageOrders = () => {
               <table className='min-w-full leading-normal'>
                 <thead>
                   <tr>
+                 
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
@@ -20,43 +39,36 @@ const ManageOrders = () => {
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      Customer
-                    </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      Price
-                    </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      Quantity
-                    </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      Address
-                    </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
                       Status
                     </th>
-
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      Action
+                      clubId
+                    </th>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+
+                      paymentId
+                    </th>
+
+                   
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                     Delete
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <SellerOrderDataRow />
+                  {
+                    memberships.map(membership => <PlantDataRow refetch={refetch} key={membership._id} membership={membership} /> )
+                  }
+                  
                 </tbody>
               </table>
             </div>
@@ -67,4 +79,4 @@ const ManageOrders = () => {
   )
 }
 
-export default ManageOrders
+export default Mymembers

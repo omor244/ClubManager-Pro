@@ -136,7 +136,7 @@ const SignUp = () => {
                     message: 'Your name is too long'
                   }
                 })}
-                className="input input-bordered input-sm w-full bg-white/50 bg-opacity-30 border-none placeholder-white text-white focus:outline-none focus:ring-1 focus:ring-white"
+                className="input  p-1 input-bordered input-sm w-full bg-white/50 bg-opacity-30 border-none placeholder-white text-white focus:outline-none focus:ring-1 focus:ring-white"
               />
               {errors.name && <p className="text-red-300 text-xs mt-1">{errors.name.message}</p>}
             </div>
@@ -176,7 +176,7 @@ const SignUp = () => {
                     message: 'Entered value does not match email format',
                   }
                 })}
-                className="input input-bordered input-sm w-full bg-white/50 bg-opacity-30 border-none placeholder-white text-white focus:outline-none focus:ring-1 focus:ring-white"
+                className="input p-1 input-bordered input-sm w-full bg-white/50 bg-opacity-30 border-none placeholder-white text-white focus:outline-none focus:ring-1 focus:ring-white"
               />
               {errors.email && <p className="text-red-300 text-xs mt-1">{errors.email.message}</p>}
             </div>
@@ -199,7 +199,7 @@ const SignUp = () => {
                     message: 'Must include uppercase, number, and special character.',
                   }
                 })}
-                className="input input-bordered input-sm w-full bg-white/50 bg-opacity-30 border-none placeholder-white text-white focus:outline-none focus:ring-1 focus:ring-white"
+                className="input p-1 input-bordered input-sm w-full bg-white/50 bg-opacity-30 border-none placeholder-white text-white focus:outline-none focus:ring-1 focus:ring-white"
               />
               {/* Display Password Errors */}
               {errors.password && <p className="text-red-300 text-xs mt-1">{errors.password.message}</p>}
@@ -214,7 +214,7 @@ const SignUp = () => {
             <div className="form-control mb-4">
               <button
                 type="submit"
-                className="btn btn-sm text-base-100 bg-black bg-opacity-60 border-none hover:bg-black hover:bg-opacity-80 rounded-full w-32 mx-auto disabled:opacity-50 w-full"
+                className="btn btn-sm text-base-100 py-1 bg-black bg-opacity-60 border-none hover:bg-black hover:bg-opacity-80 rounded-full w-32 mx-auto disabled:opacity-50 w-full"
                 disabled={loading}
               >
                 {loading ? (

@@ -14,13 +14,13 @@ import { ToastContainer } from 'react-toastify'
 
 const queryClient = new QueryClient()
 createRoot(document.getElementById('root')).render(
-  <div>
+  <StrictMode>
     <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
         <Toaster position='top-right' reverseOrder={false} />
         <ToastContainer position="top-center" />
-    </AuthProvider>
+      </AuthProvider>
     </QueryClientProvider>
-  </div>
+  </StrictMode>
 )

@@ -22,10 +22,22 @@ const ClubDetails = () => {
     console.log(club)
 
 
-    const { _id, clubName, category, status, membershipFee } = club || {}
+    const { _id, clubName, category, status, membershipFee,managerEmail } = club || {}
 
 //  userEmail amount type(membership, event) clubId(if applicable) eventId(if applicable) stripePaymentIntentId or transactionId status createdAt
     const handelpayment = () => {
+     
+    const  membershipsinfo = {
+        name: user?.displayName,
+        email: user?.email,
+        clubId: _id,
+        clubEmail: managerEmail,
+        joinedAt: new Date().toLocaleDateString(),
+        status: 'active',
+        paymentId: 10101, 
+        
+        }
+        
         const paymentinfo = {
             clubId: _id,
             name: clubName,
@@ -39,6 +51,8 @@ const ClubDetails = () => {
         axios.post('http://localhost:3000/create-checkout-session', paymentinfo)
             .then(res => {
                 console.log(res.data)
+
+                axios.post('http://localhost:3000/memberships',membershipsinfo )
 
                 window.location.href = res.data.url 
             })
@@ -123,7 +137,7 @@ const ClubDetails = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col md:flex-row items-center justify-end gap-4">
-                <button onClick={handelpayment} className="btn btn-primary btn-lg w-full md:w-auto">Join Club</button>
+                {club.status === 'approved' ? <button onClick={handelpayment} className="btn btn-primary btn-lg w-full md:w-auto">Join Club</button> : "pending" }
 
             </div>
         </div>

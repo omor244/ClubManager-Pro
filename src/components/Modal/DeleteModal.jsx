@@ -1,6 +1,21 @@
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
+import useAxiosSecure from '../../hooks/useAxiosSecure'
 
-const DeleteModal = ({ closeModal, isOpen }) => {
+const DeleteModal = ({ closeModal, isOpen, id, refetch }) => {
+  console.log(id)
+   const axiosSecure = useAxiosSecure()
+  const handeldelete = () => {
+      
+    axiosSecure.delete(`/memberships/${id}`)
+      .then(res => {
+        console.log(res.data)
+        refetch()
+
+      })
+      .catch(err => {
+      console.log(err)
+    })
+   }
   return (
     <Dialog
       open={isOpen}
@@ -28,6 +43,7 @@ const DeleteModal = ({ closeModal, isOpen }) => {
             <hr className='mt-8 ' />
             <div className='flex mt-2 justify-around'>
               <button
+                onClick={handeldelete}
                 type='button'
                 className='cursor-pointer inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2'
               >

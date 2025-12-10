@@ -1,50 +1,68 @@
 import { useState } from 'react'
 import DeleteModal from '../../Modal/DeleteModal'
-const SellerOrderDataRow = () => {
+import useAxiosSecure from '../../../hooks/useAxiosSecure'
+import { toast } from 'react-toastify'
+const SellerOrderDataRow = ({ manageEvent, refetch }) => {
+
   let [isOpen, setIsOpen] = useState(false)
   const closeModal = () => setIsOpen(false)
+  const axiosSecure = useAxiosSecure()
+
+  const { title, email, status, location, _id } = manageEvent
+
+  const handelupdatestatus = () => {
+    
+   
+    axiosSecure.patch(`/events/${_id}/update`)
+      .then(res => {
+        console.log(res.data)
+        if (res.data.modifiedCount) {
+          toast.success('Approved')
+           refetch()
+        }
+    })
+    
+  }
+
+  const handeldelete = () => {
+
+    axiosSecure.delete(`/events/${_id}/delete`)
+      .then(res => {
+        console.log(res.data)
+        refetch()
+        toast.success('successfully Deleted')
+      })
+      .catch(err => {
+      console.log(err)
+    })
+  }
+
 
   return (
     <tr>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>Money Plant</p>
+        <p className='text-gray-900 '>{ title}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>abc@gmail.com</p>
+        <p className='text-gray-900 '>{ email}</p>
+      </td>
+
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 '>{ location}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>$120</p>
-      </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>5</p>
-      </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>Dhaka</p>
-      </td>
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>Pending</p>
+        <p className={` ${status === "approved" ? 'text-green-500' : 'text-red-500'} `}>{ status}</p>
       </td>
 
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <div className='flex items-center gap-2'>
-          <select
-            required
-            className='p-1 border-2 border-lime-300 focus:outline-lime-500 rounded-md text-gray-900  bg-white'
-            name='category'
-          >
-            <option value='Pending'>Pending</option>
-            <option value='In Progress'>Start Processing</option>
-            <option value='Delivered'>Deliver</option>
-          </select>
+     
           <button
-            onClick={() => setIsOpen(true)}
-            className='relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
-          >
-            <span
-              aria-hidden='true'
-              className='absolute inset-0 bg-red-200 opacity-50 rounded-full'
-            ></span>
-            <span className='relative'>Cancel</span>
+    
+            className='relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold  leading-tight'>
+         
+            <span onClick={handelupdatestatus} className='relative btn text-green-900'>approved</span>
+            <span onClick={handeldelete} className='relative btn text-red-400'>Cancel </span>
           </button>
         </div>
         <DeleteModal isOpen={isOpen} closeModal={closeModal} />

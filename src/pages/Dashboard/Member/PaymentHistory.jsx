@@ -1,27 +1,23 @@
-
-import { useQuery } from '@tanstack/react-query'
-import useAuth from '../../../hooks/useAuth'
-import useAxiosSecure from '../../../hooks/useAxiosSecure'
-import LoadingSpinner from '../../../components/Shared/LoadingSpinner'
-import Swal from 'sweetalert2'
+import { useQuery } from '@tanstack/react-query';
+import useAuth from '../../../hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
+import Swal from 'sweetalert2';
+import { FaTrashAlt, FaCalendarAlt, FaEnvelope, FaIdBadge } from 'react-icons/fa';
 
 const PaymentHistory = () => {
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
 
-    const { user } = useAuth()
-    const axiosSicure = useAxiosSecure()
     const { data: events = [], isLoading, refetch } = useQuery({
         queryKey: ['My-clubs', user?.email],
         queryFn: async () => {
-            const res = await axiosSicure.get(`/Myclubs/payment/${user?.email}`)
+            const res = await axiosSecure.get(`/Myclubs/payment/${user?.email}`);
             return res.data;
         }
     });
 
-    console.log(events)
-
-    const handelDelete = (id) => {
-
-
+    const handleDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to access this!",
@@ -31,103 +27,67 @@ const PaymentHistory = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: `Delete`
         }).then(async (result) => {
-
-
-
             if (result.isConfirmed) {
-
-                const res = await axiosSicure.delete(`/Myclubs/delete/${id}`)
-
+                const res = await axiosSecure.delete(`/Myclubs/delete/${id}`);
                 if (res.data.deletedCount) {
-
-                    refetch()
-
+                    refetch();
                     Swal.fire({
-                        title: "Delete Now!",
-                        text: "Your file has been deleted.",
+                        title: "Deleted!",
+                        text: "Your record has been deleted.",
                         icon: "success"
                     });
-
                 }
-
-
             }
-
-        })
-    }
+        });
+    };
 
     if (isLoading) return <LoadingSpinner />;
+
     return (
-        <>
-            <div className="overflow-x-auto p-4 bg-white shadow-xl rounded-2xl">
-                <table className="table w-full table-zebra table-pin-rows">
+        <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {events.length === 0 && (
+                <div className="col-span-full text-center text-gray-500 font-medium">
+                    No payment history found.
+                </div>
+            )}
 
-                    <thead className="text-sm hidden md:table-header-group ">
-                        <tr>
-                            <th className="font-semibold text-gray-600">Event Title & Club</th>
-                            <th className="font-semibold text-gray-600">Status</th>
-                            <th className="font-semibold text-gray-600">Event Date</th>
-                            <th className="font-semibold text-gray-600">User Email</th>
-                            <th className="font-semibold text-gray-600">Registration ID</th>
-                            <th className="font-semibold text-gray-600">Action</th>
-                        </tr>
-                    </thead>
+            {events.map(event => (
+                <div
+                    key={event._id}
+                    className="bg-white rounded-2xl shadow-lg p-6 flex flex-col justify-between hover:shadow-2xl transition-shadow duration-300"
+                >
+                    {/* Event Header */}
+                    <div className="mb-4">
+                        <h3 className="text-xl font-bold text-gray-800">{event.name}</h3>
+                        <p className="text-sm text-gray-500 flex items-center gap-1">
+                            <FaIdBadge /> ID: {event.clubId}
+                        </p>
+                    </div>
 
-                    {/* Table Body */}
-                    <tbody>
-                        {
-                            events.map(event => (
+                    {/* Details */}
+                    <div className="mb-4 space-y-2">
+                        <p className="text-gray-700 flex items-center gap-2">
+                            <FaCalendarAlt className="text-purple-600" /> {event.created_At}
+                        </p>
+                        <p className="text-gray-700 flex items-center gap-2">
+                            <FaEnvelope className="text-purple-600" /> {event.member}
+                        </p>
+                        <p className="badge badge-success text-white w-max">{event.status}</p>
+                    </div>
 
-                                <tr key={event._id} className="block md:table-row border-b md:border-none mt-4 mb-3 md:mb-0 p-2 md:p-0">
+                    {/* Action */}
+                    <div className="mt-auto flex justify-end">
+                        <button
+                            onClick={() => handleDelete(event._id)}
+                            className="btn btn-outline btn-error flex items-center gap-2 hover:bg-error hover:text-purple-600 transition"
+                        >
+                            <FaTrashAlt /> Delete
+                        </button>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
 
-
-                                    <td className="block md:table-cell pt-3 md:pt-0">
-                                        <div className="font-bold text-base">{event.name}</div>
-                                        <div className="text-xs opacity-50">ID: {event.clubId}</div>
-                                    </td>
-
-
-                                    <td className="block md:table-cell">
-
-                                        <span className="font-semibold md:hidden mr-2">Status:</span>
-                                        <span className="badge badge-success text-white">
-                                            {event.status}
-                                        </span>
-                                    </td>
-
-                                    <td className="block md:table-cell">
-                                        <span className="font-semibold md:hidden mr-2">Date:</span>
-                                        {event.created_At}
-                                    </td>
-
-
-                                    <td className="block md:table-cell text-sm">
-                                        <span className="font-semibold md:hidden mr-2">Email:</span>
-
-                                        {event.member}
-                                    </td>
-
-                                    <td className="hidden md:table-cell text-sm font-mono">
-
-                                        {event._id}
-                                    </td>
-
-                                    <td className="block md:table-cell pb-3 md:pb-0 text-right">
-
-                                        <button onClick={() => handelDelete(event._id)} className="btn btn-ghost btn-md btn-outline text-info hover:bg-info hover:text-white">
-                                            Leave
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-
-
-                </table>
-            </div>
-        </>
-    )
-}
-
-export default PaymentHistory
+export default PaymentHistory;

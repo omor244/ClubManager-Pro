@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 import { motion } from 'framer-motion';
 import ClubCard from '../FeaturedClubs/ClubCard';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const containerVariants = {
   hidden: {},
@@ -16,8 +16,8 @@ const containerVariants = {
 };
 
 const Clubs = () => {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [category, setCategory] = useState([]);
 
   const { data: clubs = [], isLoading } = useQuery({
     queryKey: ['clubs'],
@@ -26,6 +26,8 @@ const Clubs = () => {
       return res.data;
     }
   });
+
+  console.log(clubs)
 
   if (isLoading) return <LoadingSpinner />;
 

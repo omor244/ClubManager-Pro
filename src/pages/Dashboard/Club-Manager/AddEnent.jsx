@@ -1,6 +1,6 @@
 import AddPlantForm from '../../../components/Form/AddPlantForm'
 
-const AddPlant = () => {
+const AddEvent = () => {
   return (
     <div>
       {/* Form */}
@@ -9,4 +9,4 @@ const AddPlant = () => {
   )
 }
 
-export default AddPlant
+export default AddEvent

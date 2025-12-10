@@ -2,13 +2,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { FaUser, FaEnvelope, FaImage } from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
-import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 
 const BecomeAManager = () => {
-    const { user } = useAuth()
-    const axiosSecure = useAxiosSecure()
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
     const {
         register,
         handleSubmit,
@@ -17,56 +16,54 @@ const BecomeAManager = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log("Manager Request Submitted:", data);
-
         const managerinfo = {
             name: data?.name,
             email: data?.email,
             photoURL: data?.photoURL,
             role: 'member',
             apply_At: new Date().toLocaleDateString()
-        } 
+        };
 
         axiosSecure.post('/manager-request', managerinfo)
             .then(res => {
-               
-                
                 if (res.data.insertedId) {
-                    toast.success('Wait For Admin')
+                    toast.success('Wait For Admin');
+                } else {
+                    toast.error("Already Requested");
                 }
-                else {
-                    toast.error("Already Requested")
-                }
-        })
- 
+            });
+
         reset();
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-base-200 p-6">
-            <div className="bg-base-100 shadow-xl rounded-2xl p-8 w-full max-w-lg">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 p-6">
+            <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-lg border border-gray-200">
 
-                {/* Title */}
-                <h2 className="text-3xl font-bold text-primary text-center mb-6">
-                    Become a Manager
-                </h2>
-                <p className="text-center text-gray-500 mb-6">
-                    Fill out the form below to request manager access.
-                </p>
+                {/* Header */}
+                <div className="text-center mb-8">
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-purple-700 mb-2">
+                        Become a Manager
+                    </h2>
+                    <p className="text-gray-500 text-sm md:text-base">
+                        Fill out the form below to request manager access
+                    </p>
+                </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
                     {/* Name */}
-                    <div>
-                        <label className="font-semibold flex items-center gap-2 mb-1">
-                            <FaUser className="text-primary" /> Full Name
+                    <div className="form-control w-full">
+                        <label className="label flex items-center gap-2">
+                            <FaUser className="text-purple-600" />
+                            <span className="label-text font-semibold text-gray-700">Full Name</span>
                         </label>
                         <input
                             type="text"
                             defaultValue={user?.displayName}
                             placeholder="Enter your name"
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full focus:border-purple-500 focus:ring-1 focus:ring-purple-300 transition"
                             {...register("name", { required: "Name is required" })}
                         />
                         {errors.name && (
@@ -75,15 +72,16 @@ const BecomeAManager = () => {
                     </div>
 
                     {/* Email */}
-                    <div>
-                        <label className="font-semibold flex items-center gap-2 mb-1">
-                            <FaEnvelope className="text-primary" /> Email Address
+                    <div className="form-control w-full">
+                        <label className="label flex items-center gap-2">
+                            <FaEnvelope className="text-purple-600" />
+                            <span className="label-text font-semibold text-gray-700">Email Address</span>
                         </label>
                         <input
                             type="email"
                             defaultValue={user?.email}
                             placeholder="Enter your email"
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full focus:border-purple-500 focus:ring-1 focus:ring-purple-300 transition"
                             {...register("email", { required: "Email is required" })}
                         />
                         {errors.email && (
@@ -92,15 +90,16 @@ const BecomeAManager = () => {
                     </div>
 
                     {/* Photo URL */}
-                    <div>
-                        <label className="font-semibold flex items-center gap-2 mb-1">
-                            <FaImage className="text-primary" /> Profile Photo URL
+                    <div className="form-control w-full">
+                        <label className="label flex items-center gap-2">
+                            <FaImage className="text-purple-600" />
+                            <span className="label-text font-semibold text-gray-700">Profile Photo URL</span>
                         </label>
                         <input
                             type="url"
                             defaultValue={user?.photoURL}
                             placeholder="Enter your photo URL"
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full focus:border-purple-500 focus:ring-1 focus:ring-purple-300 transition"
                             {...register("photoURL", { required: "Photo URL is required" })}
                         />
                         {errors.photoURL && (
@@ -108,8 +107,8 @@ const BecomeAManager = () => {
                         )}
                     </div>
 
-                    {/* Submit Button */}
-                    <button className="btn btn-primary w-full mt-4 text-lg">
+                    {/* Submit */}
+                    <button className="btn bg-purple-600  w-full py-3 font-semibold text-white text-lg rounded-xl hover:scale-105 transition-transform duration-200">
                         Submit Request
                     </button>
                 </form>
