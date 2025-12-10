@@ -25,6 +25,7 @@ import ManageClubs from '../pages/Dashboard/Admin/ManageClubs'
 import Mymembers from '../pages/Dashboard/Club-Manager/Mymembers'
 import ManageEvents from '../pages/Dashboard/Club-Manager/ManageEvents'
 import MyEventsregister from '../pages/Dashboard/Club-Manager/MyEventsregister'
+import ClubsInfo from '../pages/Dashboard/Club-Manager/ClubsInfo'
 
 export const router = createBrowserRouter([
   {
@@ -113,6 +114,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageEvents/>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'Clubs-info',
+        element: (
+          <PrivateRoute>
+            <ClubsInfo></ClubsInfo>
           </PrivateRoute>
         ),
       },
