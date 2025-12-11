@@ -9,7 +9,7 @@ const Events = () => {
     const { data: events = [], isLoading } = useQuery({
         queryKey: ['events'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:3000/events')
+            const res = await axios.get('https://clubmanagement-jade.vercel.app/events')
             return res.data;
         }
     });

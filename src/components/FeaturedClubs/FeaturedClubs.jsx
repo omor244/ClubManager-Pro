@@ -32,7 +32,7 @@ const FeaturedClubs = () => {
     const { data: clubs = [], isLoading } = useQuery({
         queryKey: ['clubs'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:3000/clubs/limit')
+            const res = await axios.get('https://clubmanagement-jade.vercel.app/clubs/limit')
 
             return res.data;
         }

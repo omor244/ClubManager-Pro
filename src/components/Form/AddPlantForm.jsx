@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const AddEventForm = () => {
   const axiosSecure = useAxiosSecure()
@@ -30,12 +31,15 @@ const AddEventForm = () => {
 
     axiosSecure.post('/events', eventinfo)
       .then(res => {
-        console.log(res.data)
+        toast.success('Successfully Added event')
         reset() 
       })
       .catch(err => {
-        console.log(err)
-      })
+      
+        if (err) {
+          toast.error('there is no Club in this Id, Please check you ClubInfo ')
+      }
+    })
 
   };
 

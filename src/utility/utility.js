@@ -18,7 +18,7 @@ export const Imageupload = async imagedata => {
 
 export const saveorupdateuser = async (userdata) => {
 
-    const { data } = await axios.post('http://localhost:3000/users', userdata)
+    const { data } = await axios.post('https://clubmanagement-jade.vercel.app/users', userdata)
     
     return data
 }

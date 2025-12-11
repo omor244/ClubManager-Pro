@@ -27,14 +27,16 @@ const Clubs = () => {
   const { data: clubs = [], isLoading } = useQuery({
     queryKey: ['clubs', Search, category],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/clubs?search=${Search}&filter=${category}`)
+      const res = await axios.get(`https://clubmanagement-jade.vercel.app/clubs?search=${Search}&filter=${category}`)
       return res.data;
     }
   });
+
+
  
   console.log(clubs)
 
-  if (isLoading) return <LoadingSpinner />;
+  // if (isLoading) return <LoadingSpinner />;
 
   const uniqueCategories = [
     // Create an array of all category strings
@@ -64,7 +66,7 @@ const Clubs = () => {
 
           </div>
           <div>
-            <select onChange={(e) => setCategory(e.target.value)} defaultValue="Server location" className="select select-neutral max-w-xl">
+            <select onChange={(e) => setCategory(e.target.value)} className="select select-neutral max-w-xl">
               <option value="">All Categories</option>
               {uniqueCategories.map(category => (
                 <option key={category} value={category}>

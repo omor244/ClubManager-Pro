@@ -1,9 +1,10 @@
 import useAuth from "../../../hooks/useAuth";
 import coverImg from "../../../assets/images/cover.jpg";
+import useRole from "../../../hooks/useRole";
 
 const Profile = () => {
   const { user } = useAuth();
-
+  const {role} = useRole()
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100 px-4 py-10">
       <div className="bg-white shadow-xl rounded-2xl w-full max-w-3xl overflow-hidden">
@@ -29,7 +30,7 @@ const Profile = () => {
         {/* Content */}
         <div className="mt-16 px-6 py-6 text-center">
           <p className="bg-green-500 text-white px-4 py-1 rounded-full text-xs w-max mx-auto font-semibold">
-            Customer
+          {role}
           </p>
 
           <h2 className="text-2xl font-semibold text-gray-800 mt-3">

@@ -5,6 +5,8 @@ import LoadingSpinner from '../components/Shared/LoadingSpinner'
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth()
   const location = useLocation()
+   
+  
 
   if (loading) return <LoadingSpinner />
   if (user) return children

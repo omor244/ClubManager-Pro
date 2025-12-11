@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import avatarImg from '../../../assets/images/placeholder.jpg';
+import useRole from '../../../hooks/useRole';
 // --- IMPORTANT ---
 
 // -----------------
@@ -16,7 +17,7 @@ const TEXT_COLOR = 'text-gray-700'; // Dark text for readability
 const Navbar = () => {
   const { user, logOut } = useAuth();
   // Placeholder for the role hook, replace with actual fetch later
-  const role = "Member";
+  const role = useRole();
   const [isOpen, setIsOpen] = useState(false);
 
   const closeMenu = () => setIsOpen(false);
@@ -70,7 +71,7 @@ const Navbar = () => {
                         {/* Logged In: Name, Role, Avatar */}
                         <div className='flex flex-col text-right text-sm leading-none'>
                           <span className='font-bold'>{user.displayName?.split(' ')[0] || 'Profile'}</span>
-                          <span className='text-xs font-medium text-gray-500'>({role})</span>
+                          <span className='text-xs font-medium text-gray-500'>({role.role})</span>
                         </div>
                         <img
                           className='rounded-full object-cover'
@@ -123,7 +124,7 @@ const Navbar = () => {
                         >
                           My Dashboard
                         </Link>
-                        <Link to={'/dashboard/profile'}>Profile</Link>
+                        <Link className={`px-4 py-3 font-semibold ${PRIMARY_COLOR} hover:bg-neutral-100 transition`} to={'/dashboard/profile'}>Profile</Link>
                         <div
                           onClick={() => {
                             logOut();

@@ -14,7 +14,7 @@ const ClubDetails = () => {
     const { data: club = {} } = useQuery({
         queryKey: ['ClubDetails', id],
         queryFn: async () => {
-            const res = await axios(`http://localhost:3000/clubs/${id}`)
+            const res = await axios(`https://clubmanagement-jade.vercel.app/clubs/${id}`)
 
             return res.data
         }
@@ -48,11 +48,11 @@ const ClubDetails = () => {
             email: user?.email,
         }
 
-        axios.post('http://localhost:3000/create-checkout-session', paymentinfo)
+        axios.post('https://clubmanagement-jade.vercel.app/create-checkout-session', paymentinfo)
             .then(res => {
                 console.log(res.data)
 
-                axios.post('http://localhost:3000/memberships',membershipsinfo )
+                axios.post('https://clubmanagement-jade.vercel.app/memberships',membershipsinfo )
 
                 window.location.href = res.data.url 
             })

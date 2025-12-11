@@ -16,7 +16,7 @@ const EventDetails = () => {
     const { data: event = {} } = useQuery({
         queryKey: ['EventsDetails', id],
         queryFn: async () => {
-            const res = await axios(`http://localhost:3000/events/${id}`)
+            const res = await axios(`https://clubmanagement-jade.vercel.app/events/${id}`)
 
             return res.data
         }
@@ -47,7 +47,7 @@ const EventDetails = () => {
             confirmButtonText: `Register`
         }).then(async (result) => {
 
-            const res = await axios.post('http://localhost:3000/register/events', registerdata)
+            const res = await axios.post('https://clubmanagement-jade.vercel.app/register/events', registerdata)
 
 
          
