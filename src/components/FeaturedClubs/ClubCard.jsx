@@ -65,7 +65,7 @@ const ClubCard = ({ club }) => {
 
                 {/* CTA Button */}
                 <Link 
-                    to={`/Clubs/${_id}`} 
+                    to={`/clubs/${_id}`} 
                     className="flex items-center justify-center gap-2 w-full bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
                 >
                     View Club
