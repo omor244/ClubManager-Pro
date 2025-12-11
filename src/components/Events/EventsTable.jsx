@@ -1,9 +1,9 @@
-import React from 'react';
+
 import { Link } from 'react-router';
 import { Calendar, MapPin, DollarSign, ArrowRight } from 'lucide-react';
 
 const EventsTable = ({ event }) => {
-    const isUpcoming = new Date(event.eventDate) > new Date();
+
     
     return (
         <div className="group h-full bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-orange-200">
@@ -30,7 +30,7 @@ const EventsTable = ({ event }) => {
             </div>
 
             {/* Card Body - Event Details */}
-            <div className="p-6">
+            <div className="p-6 h-[290px]">
                 {/* Club Name */}
                 <span className="text-xs font-bold text-orange-600 uppercase tracking-widest">
                     {event.clubName || event.clubId}
@@ -72,14 +72,11 @@ const EventsTable = ({ event }) => {
                     className="flex items-center justify-center gap-2 w-full bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
                 >
                     View Details
-                    <ArrowRight className="h-4 w-4" />
+                    
                 </Link>
             </div>
 
-            {/* Status Indicator */}
-            {isUpcoming && (
-                <div className="h-1 bg-linear-to-r from-orange-500 to-orange-600"></div>
-            )}
+           
         </div>
     );
 };

@@ -8,7 +8,7 @@ import WhyJoinAClub from '../../components/Home/WhyJoinAClub'
 const Home = () => {
   return (
     <div>
-      <div className='md:-mt-5'>
+      <div className='mt-[-20px]'>
        <Banner />
       </div>
       <div>

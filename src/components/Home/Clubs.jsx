@@ -8,21 +8,13 @@ import { useState } from 'react';
 
 // import { useState } from 'react';
 
-const containerVariants = {
-
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
 
 const Clubs = () => {
   const [Search, setSearch] = useState("");
-  console.log(Search)
+
   const [category, setCategory] = useState("");
 
-  console.log(category)
+ 
 
   const { data: clubs = [], isLoading } = useQuery({
     queryKey: ['clubs', Search, category],
@@ -58,11 +50,11 @@ const Clubs = () => {
             Your Journey Starts Here — Explore All Clubs
           </h2>
         </div>
-        <form onSubmit={(e) => e.preventDefault()} className='max-w-7xl mx-auto flex justify-between py-12 items-center'>
+        <form onSubmit={(e) => e.preventDefault()} className='lg:max-w-7xl space-y-4 lg:space-y-0  mx-auto lg:flex justify-between py-12 items-center'>
 
           <div>
             <legend className="fieldset-legend">Search</legend>
-            <input onChange={(e) => setSearch(e.target.value)} type="text" className="input w-lg" placeholder="Search here" />
+            <input onChange={(e) => setSearch(e.target.value)} type="text" className="input lg:w-lg" placeholder="Search here" />
 
           </div>
           <div>
@@ -78,7 +70,7 @@ const Clubs = () => {
         </form>
 
         <div
-          variants={containerVariants}
+        
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -86,12 +78,16 @@ const Clubs = () => {
         >
 
           {
-            clubs.length <= 0 ? <p className=' font-bold text-7xl col-span-3 mx-auto'>No Data Found</p> : <>
-              {clubs.map(club => (
-                <ClubCard key={club._id} club={club} />
-              ))
-              } </>
-          }
+            isLoading ? <LoadingSpinner></LoadingSpinner> : <>
+              {
+                clubs.length <= 0 ? <p className=' font-bold text-7xl col-span-3 mx-auto'>No Data Found</p> : <>
+                  {clubs.map(club => (
+                    <ClubCard key={club._id} club={club} />
+                  ))
+                  } </>
+              }
+            </>
+       }
         </div>
 
       </div>
