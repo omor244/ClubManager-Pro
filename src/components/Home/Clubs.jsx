@@ -5,6 +5,7 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 import { motion } from 'framer-motion';
 import ClubCard from '../FeaturedClubs/ClubCard';
 import { useState } from 'react';
+
 // import { useState } from 'react';
 
 const containerVariants = {
@@ -19,18 +20,18 @@ const containerVariants = {
 const Clubs = () => {
   const [Search, setSearch] = useState("");
   console.log(Search)
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState("");
 
   console.log(category)
 
   const { data: clubs = [], isLoading } = useQuery({
-    queryKey: ['clubs', Search],
+    queryKey: ['clubs', Search, category],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/clubs?search=${Search}`)
+      const res = await axios.get(`http://localhost:3000/clubs?search=${Search}&filter=${category}`)
       return res.data;
     }
   });
-
+ 
   console.log(clubs)
 
   if (isLoading) return <LoadingSpinner />;
@@ -39,6 +40,9 @@ const Clubs = () => {
     // Create an array of all category strings
     ...new Set(clubs.map(club => club.category))
   ];
+ 
+
+
 
 
 
@@ -52,7 +56,7 @@ const Clubs = () => {
             Your Journey Starts Here — Explore All Clubs
           </h2>
         </div>
-        <form className='max-w-7xl mx-auto flex justify-between py-12 items-center'>
+        <form onSubmit={(e) => e.preventDefault()} className='max-w-7xl mx-auto flex justify-between py-12 items-center'>
 
           <div>
             <legend className="fieldset-legend">Search</legend>
@@ -60,8 +64,8 @@ const Clubs = () => {
 
           </div>
           <div>
-            <select defaultValue="Server location" className="select select-neutral max-w-xl">
-              <option disabled={true}>All </option>
+            <select onChange={(e) => setCategory(e.target.value)} defaultValue="Server location" className="select select-neutral max-w-xl">
+              <option value="">All Categories</option>
               {uniqueCategories.map(category => (
                 <option key={category} value={category}>
                   {category}
@@ -78,14 +82,23 @@ const Clubs = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {clubs.map(club => (
-            <ClubCard key={club._id} club={club} />
-          ))}
+
+          {
+            clubs.length <= 0 ? <p className=' font-bold text-7xl col-span-3 mx-auto'>No Data Found</p> : <>
+              {clubs.map(club => (
+                <ClubCard key={club._id} club={club} />
+              ))
+              } </>
+          }
         </div>
 
       </div>
     </Container>
   );
+ 
+
+
+  
 };
 
 export default Clubs;
