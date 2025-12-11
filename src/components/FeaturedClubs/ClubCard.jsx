@@ -18,7 +18,7 @@ const ClubCard = ({ club }) => {
             {/* Banner Image with Overlay */}
             <div className="relative h-48 w-full overflow-hidden">
                 <img
-                    src={bannerImage}
+                    src={bannerImage?.startsWith("http") ? bannerImage : "/fallback.jpg"}
                     alt={clubName}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />

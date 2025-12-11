@@ -193,9 +193,10 @@ const SignUp = () => {
                     value: 6,
                     message: 'Password must be at least 6 characters',
                   },
-                  // Separated complex validation into the 'pattern' field
+                  // ^ (?=.* [a - z])(?=.* [A - Z]).{6,} $
+
                   pattern: {
-                    value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+                    value: /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/,
                     message: 'Must include uppercase, number, and special character.',
                   }
                 })}
@@ -214,7 +215,7 @@ const SignUp = () => {
             <div className="form-control mb-4">
               <button
                 type="submit"
-                className="btn btn-sm text-base-100 py-1 bg-black bg-opacity-60 border-none hover:bg-black hover:bg-opacity-80 rounded-full w-32 mx-auto disabled:opacity-50 w-full"
+                className="btn btn-sm text-base-100 py -1 bg-black bg-opacity-60 border-none hover:bg-black hover:bg-opacity-80 rounded-full w-32 mx-auto disabled:opacity-50 w-full"
                 disabled={loading}
               >
                 {loading ? (

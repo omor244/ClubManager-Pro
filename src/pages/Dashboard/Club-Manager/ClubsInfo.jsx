@@ -1,18 +1,24 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
+import useAuth from "../../../hooks/useAuth";
+
 
 const ClubsInfo = () => {
-    const data = {
-        _id: "67c5a001c101a1a1a0010011",
-        clubName: "Robotics & AI Guild",
-        category: "Technology",
-        membershipFee: 0,
-        status: "approved",
-        managerEmail: "admin1@example.com",
-        emoji: "🤖",
-        createdAt: "2025-01-10T10:20:00.000Z",
-        updatedAt: "2025-01-10T10:20:00.000Z",
-    };
+ const axiosSecure = useAxiosSecure()
+ const {user} = useAuth()
+    const { data: clubinfo = [], isLoading } = useQuery({
+        queryKey: ['Clubinfo',user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure(`/clubinfo/${user?.email}`)
+            return res.data;
+        }
+    });
+ 
+    console.log(clubinfo)
 
+    if (isLoading) return <LoadingSpinner />;
+   
     return (
         <div className="max-w-5xl mx-auto p-8">
             <h2 className="text-3xl font-bold mb-6 text-center">Club Information</h2>
@@ -32,22 +38,24 @@ const ClubsInfo = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="border">
-                        
-                            <td>{data.clubName}</td>
-                            <td>{data.category}</td>
-                            <td>{data.membershipFee === 0 ? "Free" : data.membershipFee + " ৳"}</td>
+                        {
+                            clubinfo.map(data => <tr className="border">
 
-                            <td>
-                                <span>
-                                    {data._id}
-                                </span>
-                            </td>
+                                <td>{data.clubName}</td>
+                                <td>{data.category}</td>
+                                <td>{data.membershipFee === 0 ? "Free" : data.membershipFee + " ৳"}</td>
 
-                            <td>{data.managerEmail}</td>
-                            <td>{new Date(data.createdAt).toLocaleDateString()}</td>
-                           
-                        </tr>
+                                <td>
+                                    <span>
+                                        {data._id}
+                                    </span>
+                                </td>
+
+                                <td>{data.managerEmail}</td>
+                                <td>{new Date(data.createdAt).toLocaleDateString()}</td>
+
+                            </tr>)
+                       }
                     </tbody>
                 </table>
             </div>

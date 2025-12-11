@@ -123,6 +123,7 @@ const Navbar = () => {
                         >
                           My Dashboard
                         </Link>
+                        <Link to={'/dashboard/profile'}>Profile</Link>
                         <div
                           onClick={() => {
                             logOut();

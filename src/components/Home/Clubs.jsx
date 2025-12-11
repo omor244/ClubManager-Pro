@@ -4,10 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 import { motion } from 'framer-motion';
 import ClubCard from '../FeaturedClubs/ClubCard';
+import { useState } from 'react';
 // import { useState } from 'react';
 
 const containerVariants = {
-  hidden: {},
+
   visible: {
     transition: {
       staggerChildren: 0.1,
@@ -16,13 +17,16 @@ const containerVariants = {
 };
 
 const Clubs = () => {
-  // const [search, setSearch] = useState("");
-  // const [category, setCategory] = useState([]);
+  const [Search, setSearch] = useState("");
+  console.log(Search)
+  const [category, setCategory] = useState([]);
+
+  console.log(category)
 
   const { data: clubs = [], isLoading } = useQuery({
-    queryKey: ['clubs'],
+    queryKey: ['clubs', Search],
     queryFn: async () => {
-      const res = await axios.get('http://localhost:3000/clubs')
+      const res = await axios.get(`http://localhost:3000/clubs?search=${Search}`)
       return res.data;
     }
   });
@@ -31,20 +35,12 @@ const Clubs = () => {
 
   if (isLoading) return <LoadingSpinner />;
 
-  // Create list of categories
-  // const categories = ["All", ...new Set(clubs.map(c => c.category))];
+  const uniqueCategories = [
+    // Create an array of all category strings
+    ...new Set(clubs.map(club => club.category))
+  ];
 
-  // Apply search and category filter
-  // const filteredClubs = clubs.filter(club => {
-  //   const matchSearch = club.clubName
-  //     .toLowerCase()
-  //     .includes(search.toLowerCase());
 
-  //   const matchCategory =
-  //     category === "All" ? true : club.category === category;
-
-  //   return matchSearch && matchCategory;
-  // });
 
   return (
     <Container>
@@ -56,34 +52,26 @@ const Clubs = () => {
             Your Journey Starts Here — Explore All Clubs
           </h2>
         </div>
+        <form className='max-w-7xl mx-auto flex justify-between py-12 items-center'>
 
-        {/* ✅ Search + Category Filter */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
+          <div>
+            <legend className="fieldset-legend">Search</legend>
+            <input onChange={(e) => setSearch(e.target.value)} type="text" className="input w-lg" placeholder="Search here" />
 
-          {/* Search Bar */}
-          <input
-            type="text"
-            placeholder="Search clubs..."
-            className="input input-bordered w-full md:w-1/2"
-            // value={search}
-            // onChange={(e) => setSearch(e.target.value)}
-          />
+          </div>
+          <div>
+            <select defaultValue="Server location" className="select select-neutral max-w-xl">
+              <option disabled={true}>All </option>
+              {uniqueCategories.map(category => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+        </form>
 
-          {/* Category Dropdown */}
-          <select
-            className="select select-bordered w-full md:w-1/4"
-            // value={category}
-            // onChange={(e) => setCategory(e.target.value)}
-          >
-           
-              <option  >
-                all 
-              </option>
-           
-          </select>
-        </div>
-
-        <motion.div
+        <div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -93,7 +81,7 @@ const Clubs = () => {
           {clubs.map(club => (
             <ClubCard key={club._id} club={club} />
           ))}
-        </motion.div>
+        </div>
 
       </div>
     </Container>
