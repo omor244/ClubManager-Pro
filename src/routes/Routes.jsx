@@ -6,7 +6,6 @@ import PrivateRoute from './PrivateRoute'
 import DashboardLayout from '../layouts/DashboardLayout'
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
 import Profile from '../pages/Dashboard/Common/Profile'
-import Statistics from '../pages/Dashboard/Common/Statistics'
 import MainLayout from '../layouts/MainLayout'
 import { createBrowserRouter } from 'react-router'
 import Clubs from '../components/Home/Clubs'
@@ -26,6 +25,8 @@ import Mymembers from '../pages/Dashboard/Club-Manager/Mymembers'
 import ManageEvents from '../pages/Dashboard/Club-Manager/ManageEvents'
 import MyEventsregister from '../pages/Dashboard/Club-Manager/MyEventsregister'
 import ClubsInfo from '../pages/Dashboard/Club-Manager/ClubsInfo'
+import AdminRoute from './AdminRoute'
+import ManagerRoute from './ManagerRoute'
 
 export const router = createBrowserRouter([
   {
@@ -70,83 +71,93 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        index: true,
-        element: (
-          <PrivateRoute>
-            <Statistics />
-          </PrivateRoute>
-        ),
-      },
-      {
         path: 'add-event',
         element: (
-          <PrivateRoute>
-            <AddEvent />
-        </PrivateRoute>
+          <ManagerRoute>
+            <PrivateRoute>
+              <AddEvent />
+            </PrivateRoute>
+       </ManagerRoute>
         ),
       },
       {
         path: 'create-club',
         element: (
-          <PrivateRoute>
-           <CreateClub/>
-          </PrivateRoute>
+          <ManagerRoute>
+            <PrivateRoute>
+              <CreateClub />
+            </PrivateRoute>
+          </ManagerRoute>
         ),
       },
       {
-        path: 'my-inventory',
+        path: 'my-members',
         element: (
-          <PrivateRoute>
-            <Mymembers/>
-          </PrivateRoute>
+          <ManagerRoute>
+            <PrivateRoute>
+              <Mymembers />
+            </PrivateRoute>
+      </ManagerRoute>
         ),
       },
       {
         path: 'my-register',
         element: (
-          <PrivateRoute>
-            <MyEventsregister/>
-          </PrivateRoute>
+          <ManagerRoute>
+            <PrivateRoute>
+              <MyEventsregister />
+            </PrivateRoute>
+        </ManagerRoute>
         ),
       },
       {
         path: 'manage-events',
         element: (
-          <PrivateRoute>
-            <ManageEvents/>
-          </PrivateRoute>
+          <ManagerRoute>
+            <PrivateRoute>
+              <ManageEvents />
+            </PrivateRoute>
+          </ManagerRoute>
         ),
       },
       {
         path: 'Clubs-info',
         element: (
-          <PrivateRoute>
-            <ClubsInfo></ClubsInfo>
-          </PrivateRoute>
+          <ManagerRoute>
+            <PrivateRoute>
+              <ClubsInfo></ClubsInfo>
+            </PrivateRoute>
+         </ManagerRoute>
         ),
       },
       {
         path: 'manage-users',
         element: (
-          <PrivateRoute>
-            <ManageUsers />
-          </PrivateRoute>
+          <AdminRoute>
+            <PrivateRoute>
+              <ManageUsers />
+            </PrivateRoute>
+        </AdminRoute>
         ),
       },
       {
         path: 'Transactions',
         element: (
-          <PrivateRoute>
-            <Transactions></Transactions>
-          </PrivateRoute>
+          <AdminRoute>
+            <PrivateRoute>
+              <Transactions></Transactions>
+            </PrivateRoute>
+        </AdminRoute>
         ),
       },
       {
         path: 'manage-clubs',
         element: (
-          <PrivateRoute>
-           <ManageClubs/>
-          </PrivateRoute>
+          <AdminRoute>
+            <PrivateRoute>
+              <ManageClubs />
+            </PrivateRoute>
+         </AdminRoute>
         ),
       },
       {

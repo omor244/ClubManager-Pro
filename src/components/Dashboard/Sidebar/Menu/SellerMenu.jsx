@@ -11,7 +11,7 @@ const SellerMenu = () => {
         address='add-event'
       />
       
-      <MenuItem icon={MdHomeWork} label='My members' address='my-inventory' />
+      <MenuItem icon={MdHomeWork} label='My members' address='my-members' />
       <MenuItem icon={MdHomeWork} label='My events-Register' address='my-register' />
       <MenuItem icon={FaUserPlus} label='Create A Club' address='Create-Club' />
       <MenuItem icon={FaUserPlus} label='Clubs Information' address='Clubs-info' />
