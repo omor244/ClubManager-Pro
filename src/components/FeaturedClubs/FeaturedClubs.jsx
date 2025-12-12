@@ -46,7 +46,7 @@ const FeaturedClubs = () => {
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
             <div className="max-w-7xl mx-auto">
 
-                <h2 className="text-4xl text-secondary font-bold text-center mb-12">
+                <h2 className="text-4xl text-gray-700 font-bold text-center mb-12">
                      Featured Clubs
                 </h2>
 

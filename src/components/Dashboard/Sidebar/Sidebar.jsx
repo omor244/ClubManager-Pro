@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import useAuth from '../../../hooks/useAuth'
-import logo from '../../../assets/images/logo-flat.png'
+
 // Icons
 import { GrLogout } from 'react-icons/gr'
 import { FcSettings } from 'react-icons/fc'
@@ -19,8 +19,7 @@ const Sidebar = () => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
   const role = useRole()
-  console.log(role)
-  // Sidebar Responsive Handler
+
   const handleToggle = () => {
     setActive(!isActive)
   }

@@ -25,8 +25,7 @@ const Clubs = () => {
   });
 
 
- 
-  console.log(clubs)
+
 
   // if (isLoading) return <LoadingSpinner />;
 

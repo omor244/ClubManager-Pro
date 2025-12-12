@@ -3,6 +3,7 @@ const Statistics = () => {
   return (
     <div>
       <AdminStatistics />
+
     </div>
   )
 }

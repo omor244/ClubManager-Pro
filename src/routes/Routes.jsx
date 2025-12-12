@@ -27,6 +27,7 @@ import MyEventsregister from '../pages/Dashboard/Club-Manager/MyEventsregister'
 import ClubsInfo from '../pages/Dashboard/Club-Manager/ClubsInfo'
 import AdminRoute from './AdminRoute'
 import ManagerRoute from './ManagerRoute'
+import Statistics from '../pages/Dashboard/Common/Statistics'
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        path: '/dashboard',
+        element: <Statistics></Statistics>
+    },
       {
         path: 'add-event',
         element: (

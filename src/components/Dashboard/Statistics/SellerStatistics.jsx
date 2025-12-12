@@ -1,5 +1,5 @@
 const SellerStatistics = () => {
-  return <div>Seller Statistics Page</div>
+  return <div>Seller Statistics Pagedsdsdsdsdsdsdsdsdsdsdsdsdsdsdsdsds</div>
 }
 
 export default SellerStatistics

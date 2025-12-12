@@ -32,7 +32,7 @@ const HowClubSphereWorks = () => {
     return (
         <section className="bg-base-200 py-16 px-4 md:px-12">
             <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-secondary">How ClubSphere Works</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-700">How ClubSphere Works</h2>
                 <p className="text-gray-500 mt-2">Follow these simple steps to get started with ClubSphere</p>
             </div>
 
