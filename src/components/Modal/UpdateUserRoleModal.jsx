@@ -5,10 +5,10 @@ import { toast } from 'react-toastify'
 
 const UpdateUserRoleModal = ({ isOpen, closeModal, refetch, user }) => {
   const axiossecure = useAxiosSecure()
-   console.log(user)
+ 
   const [updatedRole, setUpdatedRole] = useState(user?.role)
 
-  console.log(updatedRole)
+ 
  
   const handelupdateuser = async () => {
     try {
@@ -23,7 +23,7 @@ const UpdateUserRoleModal = ({ isOpen, closeModal, refetch, user }) => {
       toast.success("User role updated!");
       refetch();
     } catch (err) {
-      console.error("Update error:", err);
+     
       toast.error("Something went wrong!");
     }
     finally {

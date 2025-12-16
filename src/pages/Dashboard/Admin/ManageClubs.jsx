@@ -35,7 +35,7 @@ const ManageClubs = () => {
                 }
             })
             .catch(err => {
-            console.log(err)
+        
         })
         
     }
@@ -58,9 +58,9 @@ const ManageClubs = () => {
     }
 
     return (
-        <div class="overflow-x-auto">
-            <table class="table w-full border rounded-xl">
-                <thead class="bg-gray-100 text-gray-700 font-semibold">
+        <div className="overflow-x-auto">
+            <table className="table w-full border rounded-xl">
+                <thead className="bg-gray-100 text-gray-700 font-semibold">
                     <tr>
                         
                         <th>Club Name</th>
@@ -80,7 +80,7 @@ const ManageClubs = () => {
                 <tbody>
 
                     {
-                        clubs.map(club => <tr key={club._id} className="border-b mt-5">
+                        clubs.map(club => <tr key={club._id}>
 
                             <td>{club.clubName}</td>
                             <td>{club.category}</td>
@@ -90,7 +90,7 @@ const ManageClubs = () => {
 
                             <td>${club.membershipFee}</td>
                             <td>
-                                <span class="px-3 py-1 rounded-lg bg-yellow-100 text-yellow-700">
+                                <span className="px-3 py-1 rounded-lg bg-yellow-100 text-yellow-700">
                                     {club.status }
                                 </span>
                             </td>

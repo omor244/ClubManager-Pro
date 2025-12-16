@@ -16,8 +16,8 @@ const ManageUsers = () => {
     }
   });
  
-  console.log(users)
-  refetch()
+
+ 
   if (isLoading) return <LoadingSpinner />;
 
   return (

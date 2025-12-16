@@ -15,7 +15,7 @@ const MyEventsregister = () => {
         }
     });
  
-    console.log(register)
+
     if (isLoading) return <LoadingSpinner />;
 
 

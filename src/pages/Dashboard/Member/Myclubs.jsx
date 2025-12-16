@@ -10,7 +10,7 @@ const Myclubs = () => {
   
   const { user } = useAuth()
   const axiosSicure = useAxiosSecure()
-  const { data: events = [], isLoading, refetch } = useQuery({
+  const { data: events = [], isLoading,  } = useQuery({
     queryKey: ['My-clubs', user?.email],
     queryFn: async () => {
       const res = await axiosSicure.get(`/Myclubs/payment/${user?.email}`)
@@ -18,7 +18,7 @@ const Myclubs = () => {
     }
   });
 
-  console.log(events)
+ 
 
   // const handelDelete = (id) => {
 

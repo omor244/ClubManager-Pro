@@ -2,18 +2,18 @@ import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 import useAxiosSecure from '../../hooks/useAxiosSecure'
 
 const DeleteModal = ({ closeModal, isOpen, id, refetch }) => {
-  console.log(id)
+
    const axiosSecure = useAxiosSecure()
   const handeldelete = () => {
       
     axiosSecure.delete(`/memberships/${id}`)
       .then(res => {
-        console.log(res.data)
+     
         refetch()
 
       })
       .catch(err => {
-      console.log(err)
+    
     })
    }
   return (

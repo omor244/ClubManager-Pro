@@ -15,7 +15,7 @@ const ClubsInfo = () => {
         }
     });
  
-    console.log(clubinfo)
+   
 
     if (isLoading) return <LoadingSpinner />;
    
@@ -39,7 +39,7 @@ const ClubsInfo = () => {
                     </thead>
                     <tbody>
                         {
-                            clubinfo.map(data => <tr className="border">
+                            clubinfo.map(data => <tr key={data._id} className="border">
 
                                 <td>{data.clubName}</td>
                                 <td>{data.category}</td>

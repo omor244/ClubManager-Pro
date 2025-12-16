@@ -6,7 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
-const Transactions = ({  }) => {
+const Transactions = () => {
     const { user } = useAuth()
     const axiosSicure = useAxiosSecure()
 
@@ -18,7 +18,7 @@ const Transactions = ({  }) => {
         }
     });
 
-    console.log(payments)
+  
 
     // const handelDelete = (id) => {
 

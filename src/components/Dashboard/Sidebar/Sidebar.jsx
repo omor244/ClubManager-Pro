@@ -14,6 +14,7 @@ import AdminMenu from './Menu/AdminMenu'
 import SellerMenu from './Menu/SellerMenu'
 import CustomerMenu from './Menu/CustomerMenu'
 import useRole from '../../../hooks/useRole'
+import { FaChartLine } from 'react-icons/fa'
 
 const Sidebar = () => {
   const { logOut } = useAuth()
@@ -81,8 +82,8 @@ const Sidebar = () => {
             <nav>
               {/* Common Menu */}
               <MenuItem
-                icon={BsGraphUp}
-                label='Statistics'
+                icon={FaChartLine}
+                label='Analytics'
                 address='/dashboard'
               />
               {/* Role-Based Menu */}

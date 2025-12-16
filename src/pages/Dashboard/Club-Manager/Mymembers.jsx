@@ -15,8 +15,7 @@ const Mymembers = () => {
     }
   });
 
-  console.log(memberships)
-
+ 
   if (isLoading) return <LoadingSpinner />;
 
   return (
