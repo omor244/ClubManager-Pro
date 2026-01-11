@@ -1,7 +1,7 @@
 import Container from '../Container';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 // Import the X icon for modern compliance
-import { FaXTwitter } from 'react-icons/fa6';
+import { FaFacebook, FaXTwitter } from 'react-icons/fa6';
 import { Link } from 'react-router';
 // Import the logo image used in the Navbar
 
@@ -32,22 +32,45 @@ const Footer = () => {
           <div>
             <h3 className={`text-lg font-bold text-white mb-4`}>Quick Links</h3>
             <ul className={`space-y-3 ${TEXT_COLOR}`}>
-              <li><Link  className={`text-sm ${ACCENT_HOVER} transition`}>Home</Link></li>
-              <li><Link  className={`text-sm ${ACCENT_HOVER} transition`}>Browse Clubs</Link></li>
-              <li><Link  className={`text-sm ${ACCENT_HOVER} transition`}>Upcoming Events</Link></li>
-              <li><Link  className={`text-sm ${ACCENT_HOVER} transition`}>Dashboard</Link></li>
+              <li><Link to={'/'} className={`text-sm ${ACCENT_HOVER} transition`}>Home</Link></li>
+              <li><Link to={'/clubs'} className={`text-sm ${ACCENT_HOVER} transition`}>Browse Clubs</Link></li>
+              <li><Link to={'/events'} className={`text-sm ${ACCENT_HOVER} transition`}> Events</Link></li>
+              <li><Link to={'/dashboard'} className={`text-sm ${ACCENT_HOVER} transition`}>Dashboard</Link></li>
             </ul>
           </div>
 
           {/* 3. Support & Legal Section */}
           <div>
             <h3 className={`text-lg font-bold text-white mb-4`}>Support</h3>
-            <ul className={`space-y-3 ${TEXT_COLOR}`}>
-              <li><Link  className={`text-sm ${ACCENT_HOVER} transition`}>Contact Us</Link></li>
-              <li><Link  className={`text-sm ${ACCENT_HOVER} transition`}>Privacy Policy</Link></li>
-              <li><Link  className={`text-sm ${ACCENT_HOVER} transition`}>Terms of Service</Link></li>
-              <li><Link  className={`text-sm ${ACCENT_HOVER} transition`}>How It Works</Link></li>
-            </ul>
+            <div className='flex space-x-6 mt-4 md:mt-0'>
+              <a
+                href='https://github.com/omor244'
+                target='_blank'
+                rel='noopener noreferrer'
+                className={`text-xl ${TEXT_COLOR} ${ACCENT_HOVER} transition`}
+                aria-label="GitHub Repository"
+              >
+                <FaGithub />
+              </a>
+              <a
+                href='https://www.linkedin.com/in/omor-dev'
+                target='_blank'
+                rel='noopener noreferrer'
+                className={`text-xl ${TEXT_COLOR} ${ACCENT_HOVER} transition`}
+                aria-label="LinkedIn Profile"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href='https://www.facebook.com/sk.omer.1257'
+                target='_blank'
+                rel='noopener noreferrer'
+                className={`text-xl ${TEXT_COLOR} ${ACCENT_HOVER} transition`}
+                aria-label="Follow us on X (Twitter)"
+              >
+                <FaFacebook /> {/* Using the FaXTwitter icon */}
+              </a>
+            </div>
           </div>
         </div>
 
@@ -60,35 +83,7 @@ const Footer = () => {
           </p>
 
           {/* Social Icons */}
-          <div className='flex space-x-6 mt-4 md:mt-0'>
-            <a
-              href='https://github.com/your-project-repo'
-              target='_blank'
-              rel='noopener noreferrer'
-              className={`text-xl ${TEXT_COLOR} ${ACCENT_HOVER} transition`}
-              aria-label="GitHub Repository"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href='https://linkedin.com/'
-              target='_blank'
-              rel='noopener noreferrer'
-              className={`text-xl ${TEXT_COLOR} ${ACCENT_HOVER} transition`}
-              aria-label="LinkedIn Profile"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href='https://x.com/'
-              target='_blank'
-              rel='noopener noreferrer'
-              className={`text-xl ${TEXT_COLOR} ${ACCENT_HOVER} transition`}
-              aria-label="Follow us on X (Twitter)"
-            >
-              <FaXTwitter /> {/* Using the FaXTwitter icon */}
-            </a>
-          </div>
+       
         </div>
       </Container>
     </footer>

@@ -21,7 +21,7 @@ const ManageClubs = () => {
     
   
     
-    if (isLoading) return <LoadingSpinner />;
+  
     
     const handelapproved = (data) => {
   
@@ -56,6 +56,8 @@ const ManageClubs = () => {
         
         
     }
+
+    if (isLoading) return <LoadingSpinner />;
 
     return (
         <div className="overflow-x-auto">

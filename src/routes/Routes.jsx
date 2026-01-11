@@ -28,6 +28,7 @@ import ClubsInfo from '../pages/Dashboard/Club-Manager/ClubsInfo'
 import AdminRoute from './AdminRoute'
 import ManagerRoute from './ManagerRoute'
 import Statistics from '../pages/Dashboard/Common/Statistics'
+import About from '../pages/Dashboard/Common/About'
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: '/events/:id',
         element: <EventDetails/>,
+      },
+      {
+        path: '/about',
+        element: <About/>,
       },
     ],
   },

@@ -17,7 +17,7 @@ const Banner = () => {
         >
            
             <div
-                className="h-[500px] lg:h-[600px] bg-cover bg-center bg-no-repeat relative flex items-center"
+                className="h-[65vh] lg:h-[70vh] bg-cover bg-center bg-no-repeat relative flex items-center"
                 style={{ backgroundImage: `url(${bannerimg1})` }}
             >
                 {/* Dark overlay */}
@@ -57,7 +57,7 @@ const Banner = () => {
             </div>
 
             <div
-                className="h-[500px] lg:h-[600px] bg-cover bg-center bg-no-repeat relative flex items-center justify-center"
+                className="h-[65vh] lg:h-[70vh] bg-cover bg-center bg-no-repeat relative flex items-center justify-center"
                 style={{ backgroundImage: `url(${bannerimg2})` }}
             >
                 <div className="absolute inset-0 bg-black/40"></div>
@@ -73,7 +73,7 @@ const Banner = () => {
             </div>
 
             <div
-                className="h-[500px] lg:h-[600px] bg-cover bg-center bg-no-repeat relative flex items-center justify-center"
+                className="h-[65vh] lg:h-[70vh] bg-cover bg-center bg-no-repeat relative flex items-center justify-center"
                 style={{ backgroundImage: `url(${bannerimg3})` }}
             >
                 <div className="absolute inset-0 bg-black/40"></div>

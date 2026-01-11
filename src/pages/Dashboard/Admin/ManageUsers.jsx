@@ -22,7 +22,7 @@ const ManageUsers = () => {
 
   return (
     <div className="container mx-auto px-4 sm:px-8 py-10">
-      <div className="bg-white shadow-xl rounded-xl overflow-hidden">
+      <div className=" shadow-xl rounded-xl overflow-hidden">
 
         {/* Header */}
         <div className="px-6 py-5 border-b bg-gradient-to-r from-indigo-500/10 to-purple-500/10">

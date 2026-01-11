@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router";
 import { AiOutlineUsergroupAdd, AiOutlineCalendar, AiOutlineCheckCircle } from "react-icons/ai";
 import useAuth from "../../hooks/useAuth";
+import Title from "../Shared/Title";
 
 const steps = [
     {
@@ -30,10 +31,11 @@ const steps = [
 const HowClubSphereWorks = () => {
     const {user} = useAuth()
     return (
-        <section className="bg-base-200 py-16 px-4 md:px-12">
+        <section className="bg-base-200  py-16 px-4 md:px-12">
             <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-700">How ClubSphere Works</h2>
-                <p className="text-gray-500 mt-2">Follow these simple steps to get started with ClubSphere</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-700"></h2>
+                <Title title={'How ClubSphere Works'}></Title>
+                <p className="text-secondary mt-2">Follow these simple steps to get started with ClubSphere</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">

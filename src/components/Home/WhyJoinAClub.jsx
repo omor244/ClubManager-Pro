@@ -1,5 +1,6 @@
 
 import { FaUsers, FaLightbulb, FaTrophy, FaHandshake } from "react-icons/fa";
+import Title from "../Shared/Title";
 
 const data = [
     {
@@ -32,10 +33,9 @@ const WhyJoinAClub = () => {
     return (
         <section className="bg-base-100 py-16 px-4 md:px-12">
             <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-700">
-                    Why Join a Club?
-                </h2>
-                <p className="text-gray-500 mt-2">
+               
+                <Title title={'Why Join a Club?'}></Title>
+                <p className="text-secondary mt-2">
                     Discover the benefits of being part of a vibrant community
                 </p>
             </div>

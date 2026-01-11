@@ -24,10 +24,10 @@ const Events = () => {
                     <div className="h-1 w-12 bg-linear-to-r from-orange-500 to-orange-600 rounded"></div>
                     <span className="text-orange-600 font-bold uppercase text-sm tracking-wider">Events</span>
                 </div>
-                <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-4">
+                <h1 className="text-5xl md:text-6xl font-black text-secondary mb-4">
                     Discover Amazing Events
                 </h1>
-                <p className="text-xl text-gray-600 lg:mx-auto max-w-2xl">
+                <p className="text-xl text-secondary lg:mx-auto max-w-2xl">
                     Join exciting events happening in your favorite clubs. Connect with like-minded people and create unforgettable memories.
                 </p>
             </div>

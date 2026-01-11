@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import LoadingSpinner from '../Shared/LoadingSpinner'
 import ClubCard from './ClubCard'
 import { Link } from 'react-router';
+import Title from '../Shared/Title';
 
 
 
@@ -43,12 +44,11 @@ const FeaturedClubs = () => {
   
 
     return (
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 ">
             <div className="max-w-7xl mx-auto">
 
-                <h2 className="text-4xl text-gray-700 font-bold text-center mb-12">
-                     Featured Clubs
-                </h2>
+               
+                <Title title={'Featured Clubs'}></Title>
 
                 {/* this is motion dev   */}
                 <motion.div

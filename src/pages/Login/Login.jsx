@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { saveorupdateuser } from '../../utility/utility';
+import { Home } from 'lucide-react';
 
 const Login = () => {
   const { signIn, signInWithGoogle, loading, user, setLoading } = useAuth();
@@ -67,7 +68,14 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center relative overflow-hidden">
-
+       
+      <Link
+        to="/"
+        className="absolute top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-blue-600 transition-all shadow-lg group"
+      >
+        <Home size={16} className="group-hover:scale-110 transition-transform" />
+        Go Home
+      </Link>
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <div
@@ -181,6 +189,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+   
   );
 };
 
